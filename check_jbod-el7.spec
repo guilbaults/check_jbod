@@ -1,6 +1,6 @@
 Name:           check_jbod
-Version:        0.0.1
-%global gittag 0.0.1
+Version:        0.0.2
+%global gittag 0.0.2
 Release:        1%{?dist}
 Summary:        Nagios script to check the status and fault of a 84 slots Xyratex JBOD.
 
@@ -10,7 +10,6 @@ Source0:        https://github.com/guilbaults/%{name}/archive/v%{gittag}/%{name}
 
 BuildArch:      noarch
 BuildRequires:  python%{python3_pkgversion}-devel
-Requires:       sasutils
 Requires:       sg3_utils
 
 %description
@@ -29,7 +28,7 @@ This tool is used to monitor a 84 slots Xyratex JBOD, also known as:
 %install
 mkdir -p %{buildroot}/usr/lib64/nagios/plugins/
 
-sed -i -e '1i#!/usr/bin/python3' %{name}.py
+sed -i -e '1i#!/usr/bin/env python' %{name}.py
 install -m 0755 %{name}.py %{buildroot}/usr/lib64/nagios/plugins/%{name}
 
 %clean
@@ -39,6 +38,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib64/nagios/plugins/%{name}
 
 %changelog
+* Fri Jul 13 2018 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.2-1
+- Fixing the shebang and the requirements
 * Fri Jul 13 2018 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.1-1
 - Initial release, supporting Xyratex 84 slots JBOD
 
