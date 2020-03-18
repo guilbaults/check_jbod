@@ -1,7 +1,11 @@
 # check_jbod.py
-This tool is used to monitor a 84 slots Xyratex JBOD, also known as:
+This tool is used to monitor Xyratex JBOD, also known as:
 
 - Seagate/Xyratex SP-2584
+- Seagate Exos E 4U106
+- Dell MD1420
+
+These JBODs are probably also supported with some slight modifications:
 - Dell MD1280
 - Lenovo D3284
 
@@ -9,31 +13,24 @@ This tool is used to monitor a 84 slots Xyratex JBOD, also known as:
 * `sg_ses`
 
 ## Usage
-This script can be runned with NRPE.
+This script is intended to be used with NRPE. The device ID is the number on the LCD screen or set via the CLI on the Exos 4U106.
 
 ```
-usage: check_jbod.py [-h] [-v] [--fan_min FAN_MIN] [--fan_max FAN_MAX]
-                     [--volt_min VOLT_MIN] [--volt_max VOLT_MAX]
-                     [--current_min CURRENT_MIN] [--current_max CURRENT_MAX]
-                     [--psu_status] [--check_temp]
+usage: check_jbod.py [-h] [-v] [--fan] [--volt] [--current] [--psu_status]
+                     [--temp]
                      device
 
-Monitor Fans, PSU and temperature in a Xyratex 84 slots JBOD
+Monitor Fans, PSU and temperature in a Xyratex JBOD
 
 positional arguments:
-  device                sg device (/dev/sg0 by default)
+  device         JBOD ID to check
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -v, --verbosity       increase output verbosity
-  --fan_min FAN_MIN     Minimum fans RPMs
-  --fan_max FAN_MAX     Maximum fans RPMs
-  --volt_min VOLT_MIN   Minimum voltage
-  --volt_max VOLT_MAX   Maximum voltage
-  --current_min CURRENT_MIN
-                        Minimum current
-  --current_max CURRENT_MAX
-                        Maximum current
-  --psu_status          PSU status
-  --check_temp          Check temperatures based on internal thresholds
+  -h, --help     show this help message and exit
+  -v, --verbose  increase output verbosity
+  --fan          Check fan
+  --volt         Check voltage
+  --current      Check current
+  --psu_status   PSU status
+  --temp         Check temperatures based on internal thresholds
 ```

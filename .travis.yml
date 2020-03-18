@@ -1,0 +1,10 @@
+language: python
+sudo: false
+cache: pip
+python:
+- '3.6'
+fail_fast: true
+before_install:
+    - pip install flake8
+script:
+    - flake8 check_jbod.py 
