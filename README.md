@@ -2,6 +2,7 @@
 This tool is used to monitor Xyratex JBOD, also known as:
 
 - Seagate/Xyratex SP-2584
+- Seagate/Xyratex SP-3584
 - Seagate Exos E 4U106
 - Dell MD1420
 

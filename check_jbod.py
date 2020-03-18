@@ -101,7 +101,8 @@ def get_sg_jbods():
                 line)
             if mobj:
                 model = mobj.group(1)
-                if model in ['SP-34106-CFFE12P', 'UD-8435-E6EBD', 'MD1420']:
+                if model in ['SP-34106-CFFE12P', 'UD-8435-E6EBD', 'MD1420',
+                             'SP-3584-E12EBD']:
                     # A JBOD we know
                     sg = mobj.group(2)
                     jbod_id = ses_get_id_xyratex(sg)
@@ -150,7 +151,7 @@ if args.fan:
     if model == 'SP-34106-CFFE12P':
         fan_min = [6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000, 2000, 2000]
         fan_max = [8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 4000, 4000]
-    elif model == 'UD-8435-E6EBD':
+    elif model == 'UD-8435-E6EBD' or model == 'SP-3584-E12EBD':
         fan_min = [6000] * 10
         fan_max = [8000] * 10
     elif model == 'MD1420':
@@ -256,7 +257,7 @@ if args.temp:
 if args.psu_status is True:
     if model == 'SP-34106-CFFE12P':
         online_psu = [0, 2]
-    elif model == 'UD-8435-E6EBD':
+    elif model == 'UD-8435-E6EBD' or model == 'SP-3584-E12EBD':
         online_psu = [0, 2]
     elif model == 'MD1420':
         online_psu = [0, 1]
@@ -288,7 +289,7 @@ if args.volt:
     if model == 'SP-34106-CFFE12P':
         volt_min = [11.5, 190, None, None, 11.5, 190, None, None]
         volt_max = [12.5, 255, None, None, 12.5, 255, None, None]
-    elif model == 'UD-8435-E6EBD':
+    elif model == 'UD-8435-E6EBD' or model == 'SP-3584-E12EBD':
         volt_min = [11.5, None, 11.5, None]
         volt_max = [12.5, None, 12.5, None]
     elif model == 'MD1420':
@@ -325,7 +326,7 @@ if args.current:
     if model == 'SP-34106-CFFE12P':
         current_min = [25, 1, None, None, 25, 1, None, None]
         current_max = [35, 2, None, None, 35, 2, None, None]
-    elif model == 'UD-8435-E6EBD':
+    elif model == 'UD-8435-E6EBD' or model == 'SP-3584-E12EBD':
         current_min = [37.5, None, 37.5, None]
         current_max = [45, None, 45, None]
     elif model == 'MD1420':
