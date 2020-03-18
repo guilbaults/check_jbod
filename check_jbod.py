@@ -273,7 +273,7 @@ if args.psu_status is True:
                 number=psu_number,
                 status=psu[1],
             ))
-        if psu[3] != 'Hot swap=1, Fail=0, Requested on=0, Off=0, Overtmp fail=0' and psu[4] != 'Hot swap=1, Fail=0, Requested on=1, Off=0, Overtmp fail=0':  # noqa: E501
+        if psu[3] != 'Hot swap=1, Fail=0, Requested on=0, Off=0, Overtmp fail=0' and psu[3] != 'Hot swap=1, Fail=0, Requested on=1, Off=0, Overtmp fail=0':  # noqa: E501
             criticals.append('PSU{number} {status}'.format(
                 number=psu_number,
                 status=psu[1],
