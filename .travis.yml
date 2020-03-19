@@ -17,7 +17,7 @@ before_install:
 - pip install flake8
 script:
 - flake8 check_jbod.py
-- docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
+- docker run -v ${PWD}:/sources -v ${PWD}:/output:Z ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
 deploy:
   provider: releases
   api_key:
