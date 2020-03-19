@@ -1,8 +1,8 @@
 Name:           check_jbod
-Version:        0.0.2
-%global gittag 0.0.2
+Version:        0.0.3
+%global gittag 0.0.3
 Release:        1%{?dist}
-Summary:        Nagios script to check the status and fault of a 84 slots Xyratex JBOD.
+Summary:        Nagios script to check the status and fault in Xyratex JBOD.
 
 License:        Apache License 2.0
 URL:            https://github.com/guilbaults/%{name}
@@ -13,9 +13,13 @@ BuildRequires:  python%{python3_pkgversion}-devel
 Requires:       sg3_utils
 
 %description
-This tool is used to monitor a 84 slots Xyratex JBOD, also known as:
+This tool is used to monitor Xyratex JBOD, also known as:
 
 * Seagate/Xyratex SP-2584
+* Seagate/Xyratex SP-3584
+* Seagate Exos E 4U106
+* Dell MD1420
+These JBODs are probably also supported with some slight modifications:
 * Dell MD1280
 * Lenovo D3284
 
@@ -38,6 +42,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib64/nagios/plugins/%{name}
 
 %changelog
+* Thu Mar 19 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.3-1
+- Adding other models of JBODs
 * Fri Jul 13 2018 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.2-1
 - Fixing the shebang and the requirements
 * Fri Jul 13 2018 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.1-1

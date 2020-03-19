@@ -1,10 +1,30 @@
 language: python
-sudo: false
+sudo: required
 cache: pip
 python:
 - '3.6'
 fail_fast: true
+env:
+  global:
+  - DOCKER_IMAGE=alectolytic/rpmbuilder
+  - OS_ARCH=x86_64
+  matrix:
+  - OS_TYPE=centos OS_DIST=epel OS_VERSION=7
+services:
+- docker
+install: true
 before_install:
-    - pip install flake8
+- pip install flake8
 script:
-    - flake8 check_jbod.py 
+- flake8 check_jbod.py
+- docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
+deploy:
+  provider: releases
+  api_key:
+    secure: v8lb6DA3CHZeWWy6K1wMtyWp5YrYm157hi+kkFpmvRNu9IVfBLI3UwEZJi9gVpTXp4rFjrahG8tCASaerERzRNaUMWViE5XNmFa4e5ZXYPKn2LtHAP8NOvmfV1ZoaJTgLcOJCOuJ9E+kzZtiquuZFbprRdXvHDo2oYBLw697rvS3d8ai/pMPrewF1I6UIPAxcrXXwzJ/7vvIxlCs9CT+WoqQVOLj++pS8rEQ/LFISwRHoIdACdgiCyZiPpTNPtPdszCsd/3DMW5RBAXMnZjcGLQg2s0gV+yTIhfMUHux/Yj4Aj/ZtFg9hF696kZcvLI++ePh2mEeL1ZH87OisBXXlWNW9vZdZW+076nQ59KcB5u3PWGx4I6FMp/Zl4IiiCmkOzkVjU676pk192+7WgpL/xvowFaGoZ7p4zzm9WoT5I51qegKT67oWXvyTljOZKAzVAnGGSvkNkDDplY7MYvn4CoT+4GRlTQlWQVc8P+cBt5DNlYGlNJA8552jr/XE+SYU2yktqGMmUlLKXMwi9EZjwNwSN3bOuIASoVF8cuk1IJNkIywsqQUCd8gZGjHiLv34qnpMxE8QkTUAFGLV6WeaCu1Wd9Y7PkTNQJkGJnEWKf6Y3sKZzWQ2C5e1gud5FbfH49dZsX3omcsIbeYaGG+WMiC32m3bx54qF2TXpLYQx0=
+  file: output/*.rpm
+  draft: true
+  file_glob: true
+  skip_cleanup: true
+  on:
+    tags: true
