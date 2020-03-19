@@ -150,7 +150,7 @@ if args.fan:
     fans = raw_info['Cooling'][5:]
     if model == 'SP-34106-CFFE12P':
         fan_min = [6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000, 2000, 2000]
-        fan_max = [8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 4000, 4000]
+        fan_max = [8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 5000, 5000]
     elif model == 'UD-8435-E6EBD' or model == 'SP-3584-E12EBD':
         fan_min = [6000] * 10
         fan_max = [8000] * 10
@@ -325,7 +325,7 @@ if args.volt:
 if args.current:
     if model == 'SP-34106-CFFE12P':
         current_min = [25, 1, None, None, 25, 1, None, None]
-        current_max = [35, 2, None, None, 35, 2, None, None]
+        current_max = [50, 3, None, None, 50, 3, None, None]
     elif model == 'UD-8435-E6EBD' or model == 'SP-3584-E12EBD':
         current_min = [37.5, None, 37.5, None]
         current_max = [45, None, 45, None]
