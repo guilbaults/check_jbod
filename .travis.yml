@@ -18,6 +18,7 @@ before_install:
 script:
 - flake8 check_jbod.py
 - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
+- ls -laR output
 deploy:
   provider: releases
   api_key:
