@@ -42,6 +42,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib64/nagios/plugins/%{name}
 
 %changelog
+* Wed Mar 25 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.5-1
+- Increasing fan maximum speed threshold
 * Thu Mar 19 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.4-1
 - Adjusting threshold for non-idle JBODs
 * Thu Mar 19 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.3-1
