@@ -1,6 +1,6 @@
 Name:           check_jbod
-Version:        0.0.4
-%global gittag 0.0.4
+Version:        0.0.5
+%global gittag 0.0.5
 Release:        1%{?dist}
 Summary:        Nagios script to check the status and fault in Xyratex JBOD.
 
