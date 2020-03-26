@@ -1,6 +1,6 @@
 Name:           check_jbod
-Version:        0.0.5
-%global gittag 0.0.5
+Version:        0.0.6
+%global gittag 0.0.6
 Release:        1%{?dist}
 Summary:        Nagios script to check the status and fault in Xyratex JBOD.
 
@@ -42,6 +42,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib64/nagios/plugins/%{name}
 
 %changelog
+* Thu Mar 26 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.6-1
+- Ignoring another PSU status flag
 * Wed Mar 25 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.5-1
 - Increasing fan maximum speed threshold
 * Thu Mar 19 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.4-1
