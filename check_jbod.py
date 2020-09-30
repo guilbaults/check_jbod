@@ -102,7 +102,7 @@ def get_sg_jbods():
             if mobj:
                 model = mobj.group(1)
                 if model in ['SP-34106-CFFE12P', 'UD-8435-E6EBD', 'MD1420',
-                             'SP-3584-E12EBD']:
+                             'SP-3584-E12EBD', '2U12ENCJ12ESM3P']:
                     # A JBOD we know
                     sg = mobj.group(2)
                     jbod_id = ses_get_id_xyratex(sg)
@@ -157,11 +157,14 @@ if args.fan:
     elif model == 'MD1420':
         fan_min = [3000] * 4
         fan_max = [5000] * 4
+    elif model == '2U12ENCJ12ESM3P':
+        fan_min = [4500] * 4
+        fan_max = [13000] * 4
 
     for fan in [fans[i:i+4] for i in range(0, len(fans), 4)]:
         fan_number = int(fan[0].split()[1])
         status = re.match(r'.*status: (.*)', fan[1]).group(1)
-        speed = int(re.match(r'^Actual speed=(\d+) rpm', fan[3]).group(1))
+        speed = int(re.search(r'Actual speed=(\d+) rpm', fan[3]).group(1))
         if speed < fan_min[fan_number]:
             criticals.append('Fan{fan} is too slow ({rpm} RPM)'.format(
                 fan=fan_number,
@@ -261,9 +264,22 @@ if args.psu_status is True:
         online_psu = [0, 2]
     elif model == 'MD1420':
         online_psu = [0, 1]
+    elif model == '2U12ENCJ12ESM3P':
+        online_psu = [0, 1]
 
-    psus = raw_info['Power supply'][6:]
-    for psu in [psus[i:i+5] for i in range(0, len(psus), 5)]:
+    # Lenovo JBODs return more info and in more lines
+    if model == '2U12ENCJ12ESM3P':
+        psus = raw_info["Power supply"][7:]
+        psus_range = 6
+        psu_info1 = 4
+        psu_info2 = 5
+    else:
+        psus = raw_info["Power supply"][6:]
+        psus_range = 5
+        psu_info1 = 3
+        psu_info2 = 4
+
+    for psu in [psus[i: i + psus_range] for i in range(0, len(psus), psus_range)]:  # noqa: E501
         psu_number = int(psu[0].split()[1])
         if psu_number not in online_psu:
             continue
@@ -274,19 +290,19 @@ if args.psu_status is True:
                 number=psu_number,
                 status=psu[1],
             ))
-        if psu[3] not in [
+        if psu[psu_info1] not in [
             'Hot swap=1, Fail=0, Requested on=0, Off=0, Overtmp fail=0',
             'Hot swap=1, Fail=0, Requested on=1, Off=0, Overtmp fail=0',
             'Hot swap=0, Fail=0, Requested on=0, Off=0, Overtmp fail=0'
         ]:
             criticals.append('PSU{number} {status}'.format(
                 number=psu_number,
-                status=psu[3],
+                status=psu[psu_info1],
             ))
-        if psu[4] != 'Temperature warn=0, AC fail=0, DC fail=0':
+        if psu[psu_info2] != 'Temperature warn=0, AC fail=0, DC fail=0':
             criticals.append('PSU{number} {status}'.format(
                 number=psu_number,
-                status=psu[4],
+                status=psu[psu_info2],
             ))
 
 if args.volt:
@@ -299,6 +315,9 @@ if args.volt:
     elif model == 'MD1420':
         volt_min = [190, 190, 11.5, 11.5, 4.5, 4.5]
         volt_max = [255, 255, 12.5, 12.5, 5.5, 5.5]
+    elif model == '2U12ENCJ12ESM3P':
+        volt_min = [4.5, 11.5, 4.5, 11.5]
+        volt_max = [5.5, 12.5, 5.5, 12.5]
 
     sensors = split_list(raw_info['Voltage sensor'], 5)[2:]
 
@@ -336,6 +355,9 @@ if args.current:
     elif model == 'MD1420':
         current_min = [0.25, 0.25, 3, 3, 0.1, 0.1]
         current_max = [0.45, 0.45, 6, 6, 2, 2]
+    elif model == '2U12ENCJ12ESM3P':
+        current_min = [0.40, 0.10, 0.40, 0.40]
+        current_max = [42, 38, 42, 38]
     sensors = split_list(raw_info['Current sensor'], 4)[2:]
 
     for position in range(len(sensors)):
