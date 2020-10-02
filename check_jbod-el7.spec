@@ -1,6 +1,6 @@
 Name:           check_jbod
-Version:        0.0.6
-%global gittag 0.0.6
+Version:        0.0.7
+%global gittag 0.0.7
 Release:        1%{?dist}
 Summary:        Nagios script to check the status and fault in Xyratex JBOD.
 
@@ -19,6 +19,7 @@ This tool is used to monitor Xyratex JBOD, also known as:
 * Seagate/Xyratex SP-3584
 * Seagate Exos E 4U106
 * Dell MD1420
+* Lenovo D1212
 These JBODs are probably also supported with some slight modifications:
 * Dell MD1280
 * Lenovo D3284
@@ -42,6 +43,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib64/nagios/plugins/%{name}
 
 %changelog
+* Fri Oct 2 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.7-1
+- Add support for Lenovo D1212 
 * Thu Mar 26 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.6-1
 - Ignoring another PSU status flag
 * Wed Mar 25 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.5-1
