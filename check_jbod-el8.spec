@@ -1,6 +1,6 @@
 Name:           check_jbod
-Version:        0.0.7
-%global gittag 0.0.7
+Version:        0.0.8
+%global gittag 0.0.8
 Release:        1%{?dist}
 Summary:        Nagios script to check the status and fault in Xyratex JBOD.
 
@@ -44,6 +44,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib64/nagios/plugins/%{name}
 
 %changelog
+* Mon Feb 14 2022 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.8-1
+- Handling newer MD1420
 * Fri Oct 2 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.7-1
 - Add support for Lenovo D1212 
 * Thu Mar 26 2020 Simon Guilbault <simon.guilbault@calculquebec.ca> 0.0.6-1
