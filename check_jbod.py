@@ -294,7 +294,8 @@ if args.psu_status is True:
             'Hot swap=1, Fail=0, Requested on=0, Off=0, Overtmp fail=0',
             'Hot swap=1, Fail=0, Requested on=1, Off=0, Overtmp fail=0',
             'Hot swap=0, Fail=0, Requested on=0, Off=0, Overtmp fail=0',
-            'DC overcurrent=0, Hot swap=1, Fail=0, Requested on=1, Off=0'
+            'DC overcurrent=0, Hot swap=1, Fail=0, Requested on=1, Off=0',
+            'DC overcurrent=0, Hot swap=1, Fail=0, Requested on=0, Off=0'
         ]:
             criticals.append('PSU{number} {status}'.format(
                 number=psu_number,
