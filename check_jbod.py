@@ -293,13 +293,17 @@ if args.psu_status is True:
         if psu[psu_info1] not in [
             'Hot swap=1, Fail=0, Requested on=0, Off=0, Overtmp fail=0',
             'Hot swap=1, Fail=0, Requested on=1, Off=0, Overtmp fail=0',
-            'Hot swap=0, Fail=0, Requested on=0, Off=0, Overtmp fail=0'
+            'Hot swap=0, Fail=0, Requested on=0, Off=0, Overtmp fail=0',
+            'DC overcurrent=0, Hot swap=1, Fail=0, Requested on=1, Off=0'
         ]:
             criticals.append('PSU{number} {status}'.format(
                 number=psu_number,
                 status=psu[psu_info1],
             ))
-        if psu[psu_info2] != 'Temperature warn=0, AC fail=0, DC fail=0':
+        if psu[psu_info2] not in [
+            'Temperature warn=0, AC fail=0, DC fail=0',
+            'Overtmp fail=0, Temperature warn=0, AC fail=0, DC fail=0'
+        ]:
             criticals.append('PSU{number} {status}'.format(
                 number=psu_number,
                 status=psu[psu_info2],
@@ -353,7 +357,7 @@ if args.current:
         current_min = [37.5, None, 37.5, None]
         current_max = [45, None, 45, None]
     elif model == 'MD1420':
-        current_min = [0.25, 0.25, 3, 3, 0.1, 0.1]
+        current_min = [0.25, 0.25, 3, 3, 0, 0]
         current_max = [0.45, 0.45, 6, 6, 2, 2]
     elif model == '2U12ENCJ12ESM3P':
         current_min = [0.40, 0.10, 0.40, 0.40]
