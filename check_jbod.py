@@ -359,7 +359,7 @@ if args.current:
         current_max = [45, None, 45, None]
     elif model == 'MD1420':
         current_min = [0.25, 0.25, 3, 3, 0, 0]
-        current_max = [0.45, 0.45, 6, 6, 2, 2]
+        current_max = [0.45, 0.45, 7, 7, 2, 2]
     elif model == '2U12ENCJ12ESM3P':
         current_min = [0.40, 0.10, 0.40, 0.40]
         current_max = [42, 38, 42, 38]
