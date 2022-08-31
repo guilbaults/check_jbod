@@ -6,10 +6,10 @@ This tool is used to monitor Xyratex JBOD, also known as:
 - Seagate Exos E 4U106
 - Dell MD1420
 - Lenovo D1212
+- Lenovo D3284
 
 These JBODs are probably also supported with some slight modifications:
 - Dell MD1280
-- Lenovo D3284
 
 ## Requirements
 * `sg_ses`

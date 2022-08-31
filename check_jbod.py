@@ -102,7 +102,7 @@ def get_sg_jbods():
             if mobj:
                 model = mobj.group(1)
                 if model in ['SP-34106-CFFE12P', 'UD-8435-E6EBD', 'MD1420',
-                             'SP-3584-E12EBD', '2U12ENCJ12ESM3P']:
+                             'SP-3584-E12EBD', '2U12ENCJ12ESM3P', 'D32845U12GESM']:
                     # A JBOD we know
                     sg = mobj.group(2)
                     jbod_id = ses_get_id_xyratex(sg)
@@ -160,6 +160,9 @@ if args.fan:
     elif model == '2U12ENCJ12ESM3P':
         fan_min = [4500] * 4
         fan_max = [13000] * 4
+    elif model == 'D32845U12GESM':
+        fan_min = [7000] * 10
+        fan_max = [8000] * 10
 
     for fan in [fans[i:i+4] for i in range(0, len(fans), 4)]:
         fan_number = int(fan[0].split()[1])
@@ -266,6 +269,8 @@ if args.psu_status is True:
         online_psu = [0, 1]
     elif model == '2U12ENCJ12ESM3P':
         online_psu = [0, 1]
+    elif model == 'D32845U12GESM':
+        online_psu = [0, 1]
 
     # Lenovo JBODs return more info and in more lines
     if model == '2U12ENCJ12ESM3P':
@@ -273,6 +278,11 @@ if args.psu_status is True:
         psus_range = 6
         psu_info1 = 4
         psu_info2 = 5
+    elif model == 'D32845U12GESM':
+        psus = raw_info["Power supply"][6:]
+        psus_range = 5
+        psu_info1 = 3
+        psu_info2 = 4
     else:
         psus = raw_info["Power supply"][6:]
         psus_range = 5
